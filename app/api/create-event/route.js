@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import axios from 'axios';
 
 const BITRIX_WEBHOOK_URL = "https://onplan.bitrix24.com/rest/84/bru9ot41vw9a00uw/calendar.event.add.json";
 
@@ -16,10 +15,18 @@ export async function POST(req) {
       }
     };
 
-    const response = await axios.post(BITRIX_WEBHOOK_URL, payload);
-    return NextResponse.json({ success: true, data: response.data });
+    const response = await fetch(BITRIX_WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+
+    return NextResponse.json({ success: true, data });
   } catch (error) {
-    console.error("Bitrix Error:", error.message);
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
