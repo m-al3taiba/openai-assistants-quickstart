@@ -7,11 +7,12 @@ export async function POST(req) {
     const { title, start, end } = await req.json();
 
     const payload = {
-      entry: {
+      fields: {
         NAME: title,
         DATE_FROM: start,
         DATE_TO: end,
-        FROM: "84", // <-- test user fakhar
+        FROM: "84", // Your Bitrix user ID
+        ATTENDEES_CODES: ["U84"], // Required to link it to the user
         DESCRIPTION: "Created by AI Assistant"
       }
     };
