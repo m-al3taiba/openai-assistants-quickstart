@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
-const BITRIX_WEBHOOK_URL = "https://onplan.bitrix24.com/rest/84/bru9ot41vw9a00uw/calendar.event.add.json";
+const BITRIX_USER_ID = "84"; // Your user ID
+const BITRIX_WEBHOOK_URL = `https://onplan.bitrix24.com/rest/${BITRIX_USER_ID}/bru9ot41vw9a00uw/calendar.event.add.json?from=${BITRIX_USER_ID}`;
 
 export async function POST(req) {
   try {
@@ -11,8 +12,7 @@ export async function POST(req) {
         NAME: title,
         DATE_FROM: start,
         DATE_TO: end,
-        FROM: "84", // Your Bitrix user ID
-        ATTENDEES_CODES: ["U84"], // Required to link it to the user
+        ATTENDEES_CODES: [`U${BITRIX_USER_ID}`],
         DESCRIPTION: "Created by AI Assistant"
       }
     };
@@ -26,7 +26,6 @@ export async function POST(req) {
     });
 
     const data = await response.json();
-
     return NextResponse.json({ success: true, data });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
