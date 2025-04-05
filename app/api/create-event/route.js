@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const BITRIX_WEBHOOK_URL = "https://onplan.bitrix24.com/rest/84/bru9ot41vw9a00uw/calendar.event.add.json";
+const BITRIX_WEBHOOK_URL = "https://onplan.bitrix24.com/rest/84/fb9hd7gcjaygtb6p/calendar.event.add.json";
 
 export async function POST(req) {
   try {
