@@ -1,19 +1,19 @@
 import { NextResponse } from 'next/server';
 
-const BITRIX_USER_ID = "84"; // Your user ID
-const BITRIX_WEBHOOK_URL = `https://onplan.bitrix24.com/rest/${BITRIX_USER_ID}/bru9ot41vw9a00uw/calendar.event.add.json?from=${BITRIX_USER_ID}`;
+const BITRIX_WEBHOOK_URL = "https://onplan.bitrix24.com/rest/84/bru9ot41vw9a00uw/calendar.event.add.json";
 
 export async function POST(req) {
   try {
     const { title, start, end } = await req.json();
 
     const payload = {
-      fields: {
+      event: {
         NAME: title,
         DATE_FROM: start,
         DATE_TO: end,
-        ATTENDEES_CODES: [`U${BITRIX_USER_ID}`],
-        DESCRIPTION: "Created by AI Assistant"
+        DESCRIPTION: "Created by AI Assistant",
+        OWNER_ID: 84,
+        ATTENDEES_CODES: ["U84"]
       }
     };
 
