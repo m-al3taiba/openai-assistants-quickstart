@@ -11,6 +11,7 @@ export async function POST(req) {
         NAME: title,
         DATE_FROM: start,
         DATE_TO: end,
+        FROM: "84", // <-- test user fakhar
         DESCRIPTION: "Created by AI Assistant"
       }
     };
